@@ -812,6 +812,24 @@
                 document.getElementById('contactCTAButton').classList.add('slide-in-right');
                 document.getElementById('contactCTAButton').style.opacity = '1';
             }, 6000);
+            // Nos Agences Section (New)
+                setTimeout(() => {
+                    document.getElementById('agenciesTitle').classList.add('fade-in');
+                    document.getElementById('agenciesTitle').style.opacity = '1';
+                }, 6200);
+                
+                const agencyElements = ['agency1', 'agency2', 'agency3', 'agency4'];
+                agencyElements.forEach((id, index) => {
+                    setTimeout(() => {
+                        document.getElementById(id).classList.add('fade-in');
+                        document.getElementById(id).style.opacity = '1';
+                    }, 6400 + (index * 200));
+                });
+                
+                setTimeout(() => {
+                    document.getElementById('agenciesButton').classList.add('zoom-in');
+                    document.getElementById('agenciesButton').style.opacity = '1';
+                }, 7200);
         }
     </script>
 </body>
