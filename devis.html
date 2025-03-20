@@ -194,23 +194,21 @@
                 </div>
 
                 <div>
-                    <label for="modele" class="block text-gray-700 font-medium mb-1">Modèle du véhicule</label>
-                    <input type="text" id="modele" name="modele" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-souha-blue">
-                </div>
-
-                <div>
                     <label for="numeroChassis" class="block text-gray-700 font-medium mb-1">Immatriculation/Numéro de châssis <span class="text-souha-red">*</span></label>
                     <input type="text" id="numeroChassis" name="numeroChassis" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-souha-blue">
                 </div>
 
                 <div>
-                    <label for="genre" class="block text-gray-700 font-medium mb-1">Genre</label>
-                    <input type="text" id="genre" name="genre" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-souha-blue">
-                </div>
-
-                <div>
-                    <label for="typeTechnique" class="block text-gray-700 font-medium mb-1">Type technique</label>
-                    <input type="text" id="typeTechnique" name="typeTechnique" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-souha-blue">
+                    <label for="genre" class="block text-gray-700 font-medium mb-1">Genre <span class="text-souha-red">*</span></label>
+                    <select id="genre" name="genre" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-souha-blue">
+                        <option value="">Sélectionnez une option</option>
+                        <option value="VP">VP</option>
+                        <option value="Camionnette">Camionnette</option>
+                        <option value="Camion">Camion</option>
+                        <option value="Faba Faba">Faba Faba</option>
+                        <option value="Taxi">Taxi</option>
+                        <option value="Moto">Moto</option>
+                    </select>
                 </div>
 
                 <div>
@@ -223,32 +221,10 @@
                 </div>
 
                 <div>
-                    <label for="cylindree" class="block text-gray-700 font-medium mb-1">Cylindrée (cm³)</label>
-                    <input type="number" id="cylindree" name="cylindree" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-souha-blue">
-                </div>
-
-                <div>
                     <label for="puissanceFiscale" class="block text-gray-700 font-medium mb-1">Puissance fiscale <span class="text-souha-red">*</span></label>
                     <input type="number" id="puissanceFiscale" name="puissanceFiscale" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-souha-blue">
                 </div>
 
-                <div>
-                    <label for="utilisation" class="block text-gray-700 font-medium mb-1">Utilisation du véhicule <span class="text-souha-red">*</span></label>
-                    <select id="utilisation" name="utilisation" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-souha-blue">
-                        <option value="">Sélectionnez une option</option>
-                        <option value="personnel">Véhicule personnel</option>
-                        <option value="taxi">Taxi</option>
-                        <option value="faba">Faba Faba</option>
-                        <option value="transport">Transport de marchandises</option>
-                        <option value="autre">Autre</option>
-                    </select>
-                </div>
-
-                <div class="col-span-full" id="autreUtilisationContainer" style="display: none;">
-                    <label for="autreUtilisation" class="block text-gray-700 font-medium mb-1">Précisez l'utilisation</label>
-                    <input type="text" id="autreUtilisation" name="autreUtilisation" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-souha-blue">
-                </div>
-                
                 <!-- Section: Informations complémentaires -->
                 <div class="col-span-full mb-6 mt-6">
                     <h2 class="text-xl font-semibold text-souha-blue mb-4 pb-2 border-b">Informations complémentaires</h2>
@@ -356,146 +332,124 @@
     <!-- JavaScript -->
     <script>
         // Loading Screen
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                document.getElementById('loadingScreen').style.opacity = '0';
-                setTimeout(function() {
-                    document.getElementById('loadingScreen').style.display = 'none';
-                }, 500);
-                
-                // Start animations after loading
-                animateElements();
-            }, 1000);
-        });
+window.addEventListener('load', function() {
+    setTimeout(function() {
+        document.getElementById('loadingScreen').style.opacity = '0';
+        setTimeout(function() {
+            document.getElementById('loadingScreen').style.display = 'none';
+        }, 500);
         
-        // Mobile Menu Toggle
-        document.getElementById('mobileMenuButton').addEventListener('click', function() {
-            const mobileMenu = document.getElementById('mobileMenu');
-            if (mobileMenu.classList.contains('hidden')) {
-                mobileMenu.classList.remove('hidden');
-            } else {
-                mobileMenu.classList.add('hidden');
-            }
-        });
-        
-        // Animation function
-        function animateElements() {
-            // Page Title
-            setTimeout(() => {
-                document.getElementById('pageTitle').classList.add('fade-in');
-                document.getElementById('pageTitle').style.opacity = '1';
-            }, 200);
-            
-            // Form Section
-            setTimeout(() => {
-                document.getElementById('formSection').classList.add('fade-in');
-                document.getElementById('formSection').style.opacity = '1';
-            }, 500);
-        }
-        
-        // Show/hide "Autre utilisation" field based on selection
-        document.getElementById('utilisation').addEventListener('change', function() {
-            const autreContainer = document.getElementById('autreUtilisationContainer');
-            if (this.value === 'autre') {
-                autreContainer.style.display = 'block';
-            } else {
-                autreContainer.style.display = 'none';
-            }
-        });
-        
+        // Start animations after loading
+        animateElements();
+    }, 1000);
+});
 
-        // Form submission
-        document.getElementById('devisForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form data
-            const formData = new FormData(this);
-            let message = "Demande de proposition d'assurance ASSURANCE AUTO\n\n";
-            
-            // Informations personnelles
-            message += "INFORMATIONS PERSONNELLES:\n";
-            message += `Nom: ${formData.get('nom')}\n`;
-            message += `Prénom: ${formData.get('prenom')}\n`;
-            message += `Email: ${formData.get('email')}\n`;
-            message += `Téléphone: ${formData.get('telephone')}\n\n`;
-            
-            // Informations du véhicule
-            message += "INFORMATIONS DU VÉHICULE:\n";
-            message += `Nom sur la carte grise: ${formData.get('nomcarte')}\n`;
-            message += `Type de véhicule: ${formData.get('typeVehicule')}\n`;
-            message += `Marque: ${formData.get('marque')}\n`;
-            message += `Modèle: ${formData.get('modele')}\n`;
-            message += `Numéro de châssis: ${formData.get('numeroChassis')}\n`;
-            message += `Genre: ${formData.get('genre')}\n`;
-            message += `Type technique: ${formData.get('typeTechnique')}\n`;
-            message += `Carburant: ${formData.get('carburant')}\n`;
-            message += `Cylindrée: ${formData.get('cylindree')} cm³\n`;
-            message += `Puissance fiscale: ${formData.get('puissanceFiscale')}\n`;
-            
-            // Utilisation
-            let utilisation = formData.get('utilisation');
-            if (utilisation === 'autre') {
-                utilisation = formData.get('autreUtilisation');
-            }
-            message += `Utilisation: ${utilisation}\n\n`;
-            
-            // Informations complémentaires
-            const infosComplementaires = formData.get('informationsComplementaires');
-            if (infosComplementaires) {
-                message += "INFORMATIONS COMPLÉMENTAIRES:\n";
-                message += `${infosComplementaires}\n`;
-            }
-            
-            // Désactiver le bouton de soumission et afficher un message de chargement
-            const submitButton = document.getElementById('submitButton');
-            const originalButtonText = submitButton.innerHTML;
-            submitButton.disabled = true;
-            submitButton.innerHTML = '<span class="animate-pulse">Envoi en cours...</span>';
-            
-            // Numéro de téléphone pour WhatsApp (remplacez par le numéro réel)
-            // Format international sans le "+" initial (ex: 33612345678 pour +33 6 12 34 56 78)
-            const whatsappNumber = "22792767650"; // Remplacez par le numéro réel au format international
-            
-            // Encoder le message pour l'URL
-            const encodedMessage = encodeURIComponent(message);
-            
-            // Créer l'URL WhatsApp
-            const whatsappURL = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodedMessage}`;
-            
-            // Rediriger vers WhatsApp après un court délai
-            setTimeout(function() {
-                // Réinitialiser le bouton
-                submitButton.disabled = false;
-                submitButton.innerHTML = originalButtonText;
-                
-                // Ouvrir WhatsApp dans un nouvel onglet
-                window.open(whatsappURL, '_blank');
-                
-                // Afficher un message de succès
-                alert('Vous allez être redirigé vers WhatsApp pour envoyer votre demande.');
-                
-                // Réinitialiser le formulaire
-                document.getElementById('devisForm').reset();
-                
-            }, 1000); // Délai court avant redirection
-            
-            console.log(message); // Pour déboguer
-        });
+// Mobile Menu Toggle
+document.getElementById('mobileMenuButton').addEventListener('click', function() {
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (mobileMenu.classList.contains('hidden')) {
+        mobileMenu.classList.remove('hidden');
+    } else {
+        mobileMenu.classList.add('hidden');
+    }
+});
+
+// Animation function
+function animateElements() {
+    // Page Title
+    setTimeout(() => {
+        document.getElementById('pageTitle').classList.add('fade-in');
+        document.getElementById('pageTitle').style.opacity = '1';
+    }, 200);
+    
+    // Form Section
+    setTimeout(() => {
+        document.getElementById('formSection').classList.add('fade-in');
+        document.getElementById('formSection').style.opacity = '1';
+    }, 500);
+}
+
+// Form submission
+document.getElementById('devisForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Get form data
+    const formData = new FormData(this);
+    let message = "Demande de proposition d'assurance ASSURANCE AUTO\n\n";
+    
+    // Informations personnelles
+    message += "INFORMATIONS PERSONNELLES:\n";
+    message += `Nom: ${formData.get('nom')}\n`;
+    message += `Prénom: ${formData.get('prenom')}\n`;
+    message += `Email: ${formData.get('email')}\n`;
+    message += `Téléphone: ${formData.get('telephone')}\n\n`;
+    
+    // Informations du véhicule
+    message += "INFORMATIONS DU VÉHICULE:\n";
+    message += `Nom sur la carte grise: ${formData.get('nomcarte')}\n`;
+    message += `Type de véhicule: ${formData.get('typeVehicule')}\n`;
+    message += `Marque: ${formData.get('marque')}\n`;
+    message += `Immatriculation/Numéro de châssis: ${formData.get('numeroChassis')}\n`;
+    message += `Genre: ${formData.get('genre')}\n`;
+    message += `Carburant: ${formData.get('carburant')}\n`;
+    message += `Puissance fiscale: ${formData.get('puissanceFiscale')}\n\n`;
+    
+    // Informations complémentaires
+    const infosComplementaires = formData.get('informationsComplementaires');
+    if (infosComplementaires) {
+        message += "INFORMATIONS COMPLÉMENTAIRES:\n";
+        message += `${infosComplementaires}\n`;
+    }
+    
+    // Désactiver le bouton de soumission et afficher un message de chargement
+    const submitButton = document.getElementById('submitButton');
+    const originalButtonText = submitButton.innerHTML;
+    submitButton.disabled = true;
+    submitButton.innerHTML = '<span class="animate-pulse">Envoi en cours...</span>';
+    
+    // Numéro de téléphone pour WhatsApp (remplacez par le numéro réel)
+    // Format international sans le "+" initial (ex: 33612345678 pour +33 6 12 34 56 78)
+    const whatsappNumber = "22792767650"; // Remplacez par le numéro réel au format international
+    
+    // Encoder le message pour l'URL
+    const encodedMessage = encodeURIComponent(message);
+    
+    // Créer l'URL WhatsApp
+    const whatsappURL = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodedMessage}`;
+    
+    // Rediriger vers WhatsApp après un court délai
+    setTimeout(function() {
+        // Réinitialiser le bouton
+        submitButton.disabled = false;
+        submitButton.innerHTML = originalButtonText;
         
-        // Validation en temps réel des champs
-        const requiredFields = document.querySelectorAll('input[required], select[required]');
-        requiredFields.forEach(field => {
-            field.addEventListener('blur', function() {
-                if (!field.value) {
-                    field.classList.add('border-souha-red');
-                } else {
-                    field.classList.remove('border-souha-red');
-                }
-            });
-        });
+        // Ouvrir WhatsApp dans un nouvel onglet
+        window.open(whatsappURL, '_blank');
         
+        // Afficher un message de succès
+        alert('Vous allez être redirigé vers WhatsApp pour envoyer votre demande.');
         
-        document.getElementById('telephone').addEventListener('blur', function() {
+        // Réinitialiser le formulaire
+        document.getElementById('devisForm').reset();
+        
+    }, 1000); // Délai court avant redirection
+    
+    console.log(message); // Pour déboguer
+});
+
+// Validation en temps réel des champs
+const requiredFields = document.querySelectorAll('input[required], select[required]');
+requiredFields.forEach(field => {
+    field.addEventListener('blur', function() {
+        if (!field.value) {
+            field.classList.add('border-souha-red');
+        } else {
+            field.classList.remove('border-souha-red');
+        }
+    });
+});
+
+document.getElementById('telephone').addEventListener('blur', function() {
     // Nettoyer d'abord le numéro (supprimer espaces, tirets, points)
     let cleanedNumber = this.value.replace(/[\s.-]/g, '');
     
