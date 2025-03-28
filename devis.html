@@ -409,6 +409,7 @@ document.getElementById('devisForm').addEventListener('submit', function(e) {
     message += `Prénom: ${formData.get('prenom')}\n`;
     message += `Email: ${formData.get('email')}\n`;
     message += `Téléphone: ${formData.get('telephone')}\n\n`;
+    message += `Localite de: ${formData.get('localite')}\n`;
     
     // Informations du véhicule
     message += "INFORMATIONS DU VÉHICULE:\n";
