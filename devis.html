@@ -17,6 +17,18 @@
             }
         }
     </script>
+    <script>
+        // Mapping of locations to WhatsApp numbers
+        const locationWhatsappNumbers = {
+            'niamey': '22792767650',
+            'tillabery': '22796330012',
+            'say': '22797888488',
+            'ouallam': '22799367373',
+            'torodi': '22792767650',
+            'malbaza': '22792767650',
+            'gaya': '22792767650'
+        };
+    </script>
     <style>
         .fade-in {
             animation: fadeIn 1s ease-in-out forwards;
@@ -166,6 +178,20 @@
                 <div>
                     <label for="telephone" class="block text-gray-700 font-medium mb-1">Téléphone <span class="text-souha-red">*</span></label>
                     <input type="tel" id="telephone" name="telephone" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-souha-blue">
+                </div>
+
+                <div class="col-span-full">
+                    <label for="localite" class="block text-gray-700 font-medium mb-1">Localité <span class="text-souha-red">*</span></label>
+                    <select id="loclite" name="localite" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-souha-blue">
+                        <option value="">Sélectionnez une localite</option>
+                        <option value="Niamey">Niamey</option>
+                        <option value="Tillabery">Tillabery</option>
+                        <option value="Say">Say</option>
+                        <option value="Torodi">Torodi</option>
+                        <option value="Ouallam">Ouallam</option>
+                        <option value="Malbaza">Malbaza</option>
+                        <option value="Gaya">Gaya</option>
+                    </select>
                 </div>
 
                 <!-- Section: Informations du véhicule -->
@@ -407,9 +433,11 @@ document.getElementById('devisForm').addEventListener('submit', function(e) {
     submitButton.disabled = true;
     submitButton.innerHTML = '<span class="animate-pulse">Envoi en cours...</span>';
     
-    // Numéro de téléphone pour WhatsApp (remplacez par le numéro réel)
-    // Format international sans le "+" initial (ex: 33612345678 pour +33 6 12 34 56 78)
-    const whatsappNumber = "22792767650"; // Remplacez par le numéro réel au format international
+    // Récupérer la localité (prévu pour être ajouté au formulaire)
+    const localite = formData.get('localite') ? formData.get('localite').toLowerCase().trim() : 'niamey';
+    
+    // Sélectionner le numéro WhatsApp en fonction de la localité
+    const whatsappNumber = locationWhatsappNumbers[localite] || locationWhatsappNumbers['niamey'];
     
     // Encoder le message pour l'URL
     const encodedMessage = encodeURIComponent(message);
@@ -427,7 +455,7 @@ document.getElementById('devisForm').addEventListener('submit', function(e) {
         window.open(whatsappURL, '_blank');
         
         // Afficher un message de succès
-        alert('Vous allez être redirigé vers WhatsApp pour envoyer votre demande.');
+        alert(`Vous allez être redirigé vers WhatsApp (${localite.toUpperCase()}) pour envoyer votre demande.`);
         
         // Réinitialiser le formulaire
         document.getElementById('devisForm').reset();
